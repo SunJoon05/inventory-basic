@@ -11,9 +11,9 @@ let stock = [
 function syncStockState(inventory = stock) {
 
     const stock_validations = [
-        { test: (quantity) => quantity === 0, state: 'Agotado' },
-        { test: (quantity) => quantity <= 5, state: 'Crítico' },
-        { test: (quantity) => quantity > 5, state: 'Disponible' }
+        { test: (quantity) => quantity === 0, state: 'Out' },
+        { test: (quantity) => quantity <= 5, state: 'Critical' },
+        { test: (quantity) => quantity > 5, state: 'Able' }
     ]
 
     inventory.forEach(product => {
@@ -53,7 +53,7 @@ function deleteProduct(code) {
 // renderizar los datos del inventario en la tabla
 function renderInventory(inventory = stock) {
     const table = document.querySelector(".inventory-table");
-    const table_body = document.querySelectorAll(".inventory-row__body");
+    const table_body = document.querySelectorAll(".inventory-table__row--body");
 
     if (!table) return;
 
@@ -62,7 +62,7 @@ function renderInventory(inventory = stock) {
     }
 
     syncStockState();
-
+    console.log(table_body);
     inventory.forEach(product => {
         console.log(product);
         const table_row = renderInventoryRow(product);
@@ -74,11 +74,11 @@ function renderInventory(inventory = stock) {
 // responsabilidad -> crear una fila para la tabla 
 function renderInventoryRow(product) {
     const row = document.createElement("div");
-    row.classList.add("inventory-row", "inventory-row__body");
+    row.classList.add("inventory-table__row", "inventory-table__row--body");
 
     for (let prop in product) {
         const cell = document.createElement("div");
-        cell.classList.add("inventory-cell", "inventory-body__cell");
+        cell.classList.add("inventory-table__cell", "inventory-table__cell--body");
 
         if (!(prop === "state")) {
             cell.textContent = product[prop];
@@ -88,9 +88,9 @@ function renderInventoryRow(product) {
             cell.classList.add("--state", "--tooltip-container");
             tooltip.classList.add("--tooltip-top")
 
-            if (product[prop] === "Disponible") {
+            if (product[prop] === "Able") {
                 state_element.classList.add("--able");
-            } else if (product[prop] === "Agotado") {
+            } else if (product[prop] === "Out") {
                 state_element.classList.add("--out");
             } else {
                 state_element.classList.add("--critical");
@@ -176,20 +176,19 @@ const events = {
     sort: handleSortByPrice
 }
 
-sidebar.addEventListener("click", (e) => {
-    const button_selected = e.target.closest(".sidebar__button");
-    const button_action = button_selected.dataset.action;
+// sidebar.addEventListener("click", (e) => {
+//     const button_selected = e.target.closest(".sidebar__button");
+//     const button_action = button_selected.dataset.action;
 
-    if (!Object.hasOwn(events, button_action)) return;
+//     if (!Object.hasOwn(events, button_action)) return;
 
-    console.log(button_action);
+//     console.log(button_action);
 
-    events[button_action]?.();
-})
+//     events[button_action]?.();
+// })
 
 function init() {
     renderInventory();
 }
 
 init();
-console.table(stock);

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <title>Inventory Dashboard</title>
+    <script type="module" src="script.js"></script>
   </head>
 
   <body>
@@ -14,17 +15,14 @@
       <aside class="dashboard-sidebar">
         <div class="dashboard-sidebar__actions">
           <button class="dashboard-sidebar__action tooltip-trigger">
-            📦
             <span class="tooltip tooltip--right">Inventario</span>
           </button>
 
           <button class="dashboard-sidebar__action tooltip-trigger">
-            ➕
             <span class="tooltip tooltip--right">Agregar producto</span>
           </button>
 
           <button class="dashboard-sidebar__action tooltip-trigger">
-            📊
             <span class="tooltip tooltip--right">Estadísticas</span>
           </button>
         </div>
@@ -45,7 +43,7 @@
                 type="search"
                 placeholder="Buscar producto..."
               />
-              <button class="inventory-search__button">🔍</button>
+              <button class="inventory-search__button"></button>
             </div>
           </header>
 
@@ -70,23 +68,73 @@
           <!-- INVENTORY PANEL -->
           <section class="inventory-panel">
             <!-- TABLE -->
+            <div class="inventory-panel__header">
+              <div class="inventory-panel__tag">
+                <span class="inventory-panel__tag--icon"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="12"
+                    height="12"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                    <path
+                      d="M19 2h-2v3h-4V2h-2v3H7V2H5v3H2v2h3v4H2v2h3v4H2v2h3v3h2v-3h4v3h2v-3h4v3h2v-3h3v-2h-3v-4h3v-2h-3V7h3V5h-3zm-8 9H7V7h4zm0 2v4H7v-4zm2 0h4v4h-4zm0-2V7h4v4z"
+                    ></path></svg
+                ></span>
+                <span class="inventory-panel__tag--title"
+                  >Products Details</span
+                >
+              </div>
+              <div>
+                <button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                    <path
+                      d="M12 16H8V2H6v14H2l5 6zm0-8h4v14h2V8h4l-5-6z"
+                    ></path>
+                  </svg>
+                </button>
+                <button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <!--Boxicons v3.0.8 https://boxicons.com | License  https://docs.boxicons.com/free-->
+                    <path
+                      d="M19.07 4.93c-.45-.45-.95-.86-1.48-1.22a9.6 9.6 0 0 0-1.7-.92c-.6-.25-1.24-.45-1.88-.58-1.32-.27-2.71-.27-4.03 0-.64.13-1.27.33-1.88.58a9.96 9.96 0 0 0-4.4 3.62 9.6 9.6 0 0 0-.92 1.7c-.25.6-.45 1.24-.58 1.88-.13.66-.2 1.34-.2 2.01s.07 1.35.2 2.01c.13.64.33 1.27.58 1.88a9.96 9.96 0 0 0 3.62 4.4c.53.36 1.1.67 1.7.92s1.24.45 1.88.58c.66.13 1.34.2 2.01.2s1.35-.07 2.01-.2c.64-.13 1.27-.33 1.88-.58a9.96 9.96 0 0 0 4.4-3.62c.36-.53.67-1.1.92-1.7s.45-1.24.58-1.88c.13-.66.2-1.34.2-2.01h-2a7.85 7.85 0 0 1-.63 3.11c-.2.48-.45.93-.74 1.36-.28.42-.61.82-.98 1.19-.36.36-.76.69-1.18.98-.43.29-.88.54-1.36.74s-.99.36-1.5.47a8 8 0 0 1-4.73-.47c-.48-.2-.93-.45-1.36-.74-.42-.29-.82-.62-1.18-.98s-.69-.76-.98-1.19a8 8 0 0 1-.74-1.36c-.2-.48-.36-.99-.47-1.5A8 8 0 0 1 3.97 12a7.85 7.85 0 0 1 .63-3.11c.2-.48.45-.93.74-1.36.29-.42.62-.82.98-1.18s.76-.69 1.18-.98c.43-.29.88-.54 1.36-.74s.99-.36 1.5-.47a8 8 0 0 1 4.73.47c.48.2.93.45 1.36.74.42.29.82.62 1.18.98.17.17.32.34.48.52L15.98 9h6V3l-2.45 2.45c-.15-.18-.31-.36-.48-.52Z"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
             <div class="inventory-table">
               <!-- HEADER ROW -->
               <div class="inventory-table__row inventory-table__row--head">
                 <span class="inventory-table__cell inventory-table__cell--head"
-                  >Producto</span
+                  >Product Details</span
                 >
                 <span class="inventory-table__cell inventory-table__cell--head"
-                  >Categoría</span
+                  >Code</span
                 >
                 <span class="inventory-table__cell inventory-table__cell--head"
-                  >Stock</span
+                  >Quantity</span
                 >
                 <span class="inventory-table__cell inventory-table__cell--head"
-                  >Estado</span
+                  >Price</span
                 >
                 <span class="inventory-table__cell inventory-table__cell--head"
-                  >Acciones</span
+                  >State</span
                 >
               </div>
 
@@ -104,7 +152,7 @@
         </section>
 
         <!-- PRODUCT FORM VIEW -->
-        <section class="product-form-view --visible">
+        <section class="product-form-view --hidden">
           <form class="product-form">
             <h2 class="product-form__title">Agregar producto</h2>
 
