@@ -1,0 +1,209 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat';
+    block-size: 100vh;
+}
+
+h1,
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+.app-dashboard {
+    display: flex;
+}
+
+/*APP SIDEBAR*/
+
+.dashboard-sidebar {
+    display: flex;
+    background-color: white;
+    padding: 1rem .6rem;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, .5);
+}
+
+.dashboard-sidebar__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: .5rem;
+}
+
+.dashboard-sidebar__action {
+    background-color: rgba(218, 218, 218, 0.267);
+    border: none;
+    border-radius: .5rem;
+    padding: .2rem;
+    margin: 0;
+    transition: all .25s ease;
+}
+
+.dashboard-sidebar__action:hover {
+    background-color: black;
+}
+
+/*CONTENT APP*/
+
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-sizing: border-box;
+    flex-grow: 1;
+}
+
+/*APP VIEWS*/
+
+.inventory-view {}
+
+.inventory-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*Estilos para el inventario*/
+
+.page-content {
+    display: flex;
+}
+
+.inventory {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    padding: 1rem;
+    font-size: .8rem;
+    border: 1px solid #000;
+}
+
+.inventory-table {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.inventory-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    box-shadow: 0 0 5px 0 rgba(190, 186, 186, 0.4);
+    box-sizing: border-box;
+    border-radius: .6rem;
+    padding: .5rem;
+    color: gray;
+}
+
+.inventory-row.inventory-row__head {
+    background-color: rgba(190, 186, 186, 0.4);
+    box-shadow: none;
+
+    & .inventory-cell {
+        border: none;
+        color: black;
+    }
+}
+
+.inventory-cell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-wrap: nowrap;
+}
+
+.inventory-cell:not(:last-child) {
+    border-inline-end: 1px solid rgba(190, 186, 186, 0.4);
+}
+
+/*tooltip*/
+
+.--tooltip-container {
+    position: relative;
+    font-family: 'Montserrat';
+}
+
+.--tooltip-container:hover .--tooltip-top {
+    top: -170%;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.--tooltip-container:hover .--tooltip-right {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.--tooltip-top {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: inherit;
+
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: all .3s ease-in-out;
+
+    padding: .3em .6em;
+    background-color: #fff;
+    border-radius: .4em;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .3);
+}
+
+.--tooltip-right {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    margin-left: .5rem;
+    font-family: inherit;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all .3s ease-in-out;
+
+    padding: .3em .6em;
+    background-color: #fff;
+    border-radius: .4em;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .3);
+}
+
+/* colores para el estado del producto*/
+.--state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.--able {
+    background-color: green;
+    inline-size: 1rem;
+    block-size: 1rem;
+    border-radius: .4em;
+}
+
+.--critical {
+    background-color: orange;
+    inline-size: 1rem;
+    block-size: 1rem;
+    border-radius: .4em;
+}
+
+.--out {
+    background-color: red;
+    inline-size: 1rem;
+    block-size: 1rem;
+    border-radius: .4em;
+}
+
+.--visible {
+    display: auto;
+}
+
+.--hidden {
+    display: none;
+}
