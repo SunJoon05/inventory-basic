@@ -28,12 +28,12 @@ function syncStockState(inventory = stock) {
 
 // step 3 actualizar stock
 
-const in_stock = (stock, code) => {
+const inStock = (stock, code) => {
     return stock.find(product => product.code.trim().toLowerCase() === code.trim().toLowerCase());
 }
 
 function updateStock(new_quantity, stock, code) {
-    product = in_stock(stock, code);
+    product = inStock(stock, code);
 
     if (!product) {
         console.log('El producto no existe');
@@ -62,9 +62,7 @@ function renderInventory(inventory = stock) {
     }
 
     syncStockState();
-    console.log(table_body);
     inventory.forEach(product => {
-        console.log(product);
         const table_row = renderInventoryRow(product);
         table.appendChild(table_row);
     });
@@ -136,7 +134,7 @@ function handleSortByPrice() {
 
 // step 10 hay productos en stock
 
-function has_products(stock) {
+function hasProducts(stock) {
     return stock.some(product => product.quantity > 5);
 }
 
@@ -159,33 +157,39 @@ function replaceProduct(new_product, code) {
     });
 }
 
-// configuracion de vistas para mostrar
-
-const views = {
-    inventory: document.querySelector(".inventory-section"),
-    form: document.querySelector(".form-section")
+// agregar el producto al array de productos
+function addProduct(new_product) {
+    stock.push(new_product);
 }
 
+// configuracion de vistas para mostrar
+const views = [
+    { selector: document.querySelector(".inventory-panel"), dataset: "inventory" },
+    { selector: document.querySelector(".product-form-view"), dataset: "form" }
+]
+
+function showViews(dataset) {
+    views.forEach(view => {
+        if (view.dataset === dataset) {
+            view.selector.classList.remove("--hidden");
+        } else {
+            view.selector.classList.add("--hidden");
+        }
+    });
+}
 
 // seleccionar los botones para insertar html dinamico
-const sidebar = document.querySelector('.sidebar');
+const sidebar = document.querySelector('.dashboard-sidebar');
 
-const events = {
-    check: renderInventory,
-    show: syncStockState,
-    sort: handleSortByPrice
-}
+sidebar.addEventListener("click", (e) => {
+    const button_selected = e.target.closest(".dashboard-sidebar__action");
+    if (!button_action) return;
 
-// sidebar.addEventListener("click", (e) => {
-//     const button_selected = e.target.closest(".sidebar__button");
-//     const button_action = button_selected.dataset.action;
+    const button_action = button_selected.dataset.action;
+    if (!views.some(view => view.dataset === button_action)) return;
 
-//     if (!Object.hasOwn(events, button_action)) return;
-
-//     console.log(button_action);
-
-//     events[button_action]?.();
-// })
+    showViews(button_action)
+})
 
 function init() {
     renderInventory();
